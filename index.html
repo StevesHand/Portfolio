@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stephen Hand | IT Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #0a0e1a;
+    color: #c9d1e0;
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .terminal-bar {
+    background: #111827;
+    border-bottom: 1px solid #1e3a5f;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+  .terminal-title {
+    margin-left: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #4a6fa5;
+  }
+  .nav-links { margin-left: auto; display: flex; gap: 24px; }
+  .nav-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #4a8fd4;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #7fc6ff; }
+
+  .hero {
+    padding: 80px 48px 60px;
+    border-bottom: 1px solid #1e3a5f;
+    max-width: 900px;
+  }
+  .prompt {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #28c840;
+    margin-bottom: 16px;
+    letter-spacing: 0.05em;
+  }
+  h1 {
+    font-size: 52px;
+    font-weight: 300;
+    color: #e8edf5;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  h1 span { color: #4a8fd4; font-weight: 500; }
+  .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: #4a8fd4;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .bio {
+    font-size: 16px;
+    color: #8fa3c0;
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary { background: #4a8fd4; color: #0a0e1a; font-weight: 500; }
+  .btn-primary:hover { background: #7fc6ff; }
+  .btn-outline { background: transparent; border: 1px solid #1e3a5f; color: #4a8fd4; }
+  .btn-outline:hover { border-color: #4a8fd4; background: rgba(74,143,212,0.08); }
+
+  section {
+    padding: 60px 48px;
+    border-bottom: 1px solid #111827;
+    max-width: 900px;
+  }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #28c840;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h2 {
+    font-size: 28px;
+    font-weight: 300;
+    color: #e8edf5;
+    margin-bottom: 32px;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .skill-card {
+    background: #111827;
+    border: 1px solid #1e3a5f;
+    border-radius: 6px;
+    padding: 16px 18px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .skill-card:hover { border-color: #4a8fd4; background: #131c2e; }
+  .skill-name { font-size: 14px; font-weight: 500; color: #c9d1e0; margin-bottom: 4px; }
+  .skill-level { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a6fa5; }
+  .skill-bar { margin-top: 10px; height: 2px; background: #1e3a5f; border-radius: 2px; }
+  .skill-fill { height: 100%; background: #4a8fd4; border-radius: 2px; }
+
+  .edu-card {
+    background: #111827;
+    border: 1px solid #1e3a5f;
+    border-left: 3px solid #4a8fd4;
+    border-radius: 0 6px 6px 0;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .edu-title { font-size: 16px; font-weight: 500; color: #e8edf5; margin-bottom: 4px; }
+  .edu-meta { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4a6fa5; margin-bottom: 10px; }
+  .grade-pill {
+    display: inline-block;
+    background: rgba(40,200,64,0.12);
+    border: 1px solid rgba(40,200,64,0.3);
+    color: #28c840;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-right: 6px;
+    margin-top: 6px;
+  }
+  .grade-pill.ongoing {
+    background: rgba(74,143,212,0.12);
+    border-color: rgba(74,143,212,0.3);
+    color: #4a8fd4;
+  }
+
+  .exp-entry {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .exp-date {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #4a6fa5;
+    padding-top: 3px;
+    line-height: 1.6;
+  }
+  .exp-role { font-size: 16px; font-weight: 500; color: #e8edf5; margin-bottom: 2px; }
+  .exp-org { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4a8fd4; margin-bottom: 10px; }
+  .exp-points { list-style: none; font-size: 14px; color: #8fa3c0; }
+  .exp-points li { padding: 3px 0 3px 16px; position: relative; }
+  .exp-points li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #4a8fd4;
+    font-size: 10px;
+    top: 6px;
+  }
+
+  .contact-row { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
+  .contact-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: #4a8fd4;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+  .contact-item:hover { color: #7fc6ff; }
+  .contact-item span { color: #4a6fa5; }
+
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 22px;
+    background: #4a8fd4;
+    vertical-align: middle;
+    margin-left: 4px;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  footer {
+    padding: 32px 48px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #2a3a54;
+    max-width: 900px;
+  }
+</style>
+</head>
+<body>
+
+<div class="terminal-bar">
+  <div class="dot dot-red"></div>
+  <div class="dot dot-yellow"></div>
+  <div class="dot dot-green"></div>
+  <div class="terminal-title">stephen-hand ~ portfolio</div>
+  <nav class="nav-links">
+    <a href="#skills">skills</a>
+    <a href="#education">education</a>
+    <a href="#experience">experience</a>
+    <a href="#contact">contact</a>
+  </nav>
+</div>
+
+<section class="hero" id="home">
+  <div class="prompt">~/stephen-hand $ whoami</div>
+  <h1>Stephen<br><span>Hand</span></h1>
+  <div class="tagline">IT Professional in Transition &nbsp;|&nbsp; NZ Certificate IT (L5) &nbsp;|&nbsp; Security-Minded</div>
+  <p class="bio">
+    Results-driven professional moving into IT with 5+ years of real-world technical support, operations leadership, and user assistance. Currently pursuing CompTIA A+, Network+, and Security+ — with a long-term focus on cybersecurity.
+  </p>
+  <div class="cta-row">
+    <a href="#contact" class="btn btn-primary">Get in touch</a>
+    <a href="#experience" class="btn btn-outline">View experience</a>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">// skills</div>
+  <h2>What I bring to the table<span class="cursor"></span></h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-name">IT Support & Helpdesk</div>
+      <div class="skill-level">hardware · software · end-user</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Microsoft 365</div>
+      <div class="skill-level">Outlook · Teams · OneDrive</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Networking Fundamentals</div>
+      <div class="skill-level">TCP/IP · Wi-Fi · troubleshooting</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Programming Fundamentals</div>
+      <div class="skill-level">A+ grade · BIT502</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Windows OS</div>
+      <div class="skill-level">admin · troubleshooting</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Cybersecurity Awareness</div>
+      <div class="skill-level">CompTIA Security+ (studying)</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Device Setup & Onboarding</div>
+      <div class="skill-level">laptops · accounts · printers</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-name">Leadership & Communication</div>
+      <div class="skill-level">10+ staff · 140 users managed</div>
+      <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-label">// education</div>
+  <h2>Credentials & training</h2>
+
+  <div class="edu-card">
+    <div class="edu-title">NZ Certificate in Information Technology — Level 5</div>
+    <div class="edu-meta">NZ2595 &nbsp;·&nbsp; Completed 2026</div>
+    <span class="grade-pill">Programming — A+ (92.8)</span>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-title">CompTIA A+ · Network+ · Security+</div>
+    <div class="edu-meta">Self-directed study &nbsp;·&nbsp; In progress</div>
+    <span class="grade-pill ongoing">Ongoing</span>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-title">NZBSA Certificate in Boarding Practice</div>
+    <div class="edu-meta">NZ Boarding Schools' Association &nbsp;·&nbsp; Completed</div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">// experience</div>
+  <h2>Where I've worked</h2>
+
+  <div class="exp-entry">
+    <div class="exp-date">Dec 2021<br>— Present</div>
+    <div class="exp-content">
+      <div class="exp-role">Boarding Manager</div>
+      <div class="exp-org">St Bede's College · Christchurch, NZ</div>
+      <ul class="exp-points">
+        <li>First-line technical support for hardware, software, Wi-Fi, printing, and login issues</li>
+        <li>Device setup and onboarding for student laptops, accounts, email, and network access</li>
+        <li>Microsoft 365 administration — Outlook, Teams, OneDrive, Word</li>
+        <li>Managed 10 staff and pastoral care for 140 users in a live IT environment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exp-entry">
+    <div class="exp-date">Aug 2020<br>— Nov 2021</div>
+    <div class="exp-content">
+      <div class="exp-role">Senior Supervisor</div>
+      <div class="exp-org">St Peter's College · Gore, NZ</div>
+      <ul class="exp-points">
+        <li>Supported staff and students with IT routines and systems</li>
+        <li>Operational management in a structured, policy-compliant environment</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">// contact</div>
+  <h2>Let's connect</h2>
+  <p style="color:#8fa3c0; margin-bottom:24px; font-size:15px;">Open to entry-level IT support, helpdesk, and junior security roles. Based in Christchurch — open to relocation.</p>
+  <div class="contact-row">
+    <a href="mailto:stephendavidhand@gmail.com" class="contact-item">
+      <span>✉</span> stephendavidhand@gmail.com
+    </a>
+    <a href="tel:02040782440" class="contact-item">
+      <span>☎</span> 0204 078 2440
+    </a>
+    <a href="https://github.com/StevesHand" class="contact-item">
+      <span>⌥</span> github.com/StevesHand
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div>// built with HTML · CSS · ambition &nbsp;·&nbsp; stephen hand © 2026</div>
+</footer>
+
+</body>
+</html>
