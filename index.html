@@ -49,6 +49,80 @@
   }
   .nav-links a:hover { color: #7fc6ff; }
 
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .project-card {
+    background: #111827;
+    border: 1px solid #1e3a5f;
+    border-radius: 8px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .project-card:hover { border-color: #4a8fd4; transform: translateY(-2px); }
+  .project-card-header { display: flex; align-items: center; justify-content: space-between; }
+  .project-icon {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 20px;
+    color: #4a8fd4;
+  }
+  .project-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: rgba(74,143,212,0.12);
+    border: 1px solid rgba(74,143,212,0.3);
+    color: #4a8fd4;
+  }
+  .project-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #e8edf5;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: #6a7f9a;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tech-pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #0d1120;
+    border: 1px solid #1e3a5f;
+    color: #4a6fa5;
+  }
+  .project-links { display: flex; gap: 10px; margin-top: 4px; }
+  .project-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #4a8fd4;
+    text-decoration: none;
+    border: 1px solid #1e3a5f;
+    border-radius: 4px;
+    padding: 5px 12px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .project-link:hover { border-color: #4a8fd4; background: rgba(74,143,212,0.08); }
+  .project-link.primary { background: #4a8fd4; color: #0a0e1a; border-color: #4a8fd4; font-weight: 500; }
+  .project-link.primary:hover { background: #7fc6ff; }
+
   .hero {
     padding: 80px 48px 60px;
     border-bottom: 1px solid #1e3a5f;
@@ -239,6 +313,7 @@
   <div class="terminal-title">stephen-hand ~ portfolio</div>
   <nav class="nav-links">
     <a href="#skills">skills</a>
+    <a href="#projects">projects</a>
     <a href="#education">education</a>
     <a href="#experience">experience</a>
     <a href="#contact">contact</a>
@@ -255,6 +330,45 @@
   <div class="cta-row">
     <a href="#contact" class="btn btn-primary">Get in touch</a>
     <a href="#experience" class="btn btn-outline">View experience</a>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">// projects</div>
+  <h2>Things I've built<span class="cursor"></span></h2>
+  <div class="project-grid">
+
+    <div class="project-card">
+      <div class="project-card-header">
+        <span class="project-icon">⬡</span>
+        <span class="project-tag">CRUD App</span>
+      </div>
+      <div class="project-title">Helpdesk Ticket Tracker</div>
+      <div class="project-desc">A full-stack helpdesk ticketing system. Create, update, filter, and resolve IT support tickets — with priority levels, assignees, and live status tracking. Data persists across sessions.</div>
+      <div class="project-tech">
+        <span class="tech-pill">HTML</span>
+        <span class="tech-pill">CSS</span>
+        <span class="tech-pill">JavaScript</span>
+        <span class="tech-pill">localStorage</span>
+      </div>
+      <div class="project-links">
+        <a href="https://steveshand.github.io/Helpdesk-ticket-tracker/" class="project-link primary" target="_blank">Live Demo ↗</a>
+        <a href="https://github.com/StevesHand/Helpdesk-ticket-tracker" class="project-link" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
+    <div class="project-card" style="border-style: dashed; opacity: 0.5;">
+      <div class="project-card-header">
+        <span class="project-icon">+</span>
+        <span class="project-tag">Coming Soon</span>
+      </div>
+      <div class="project-title">Next Project</div>
+      <div class="project-desc">More projects in progress as I continue building my skills in IT support, networking, and cybersecurity.</div>
+      <div class="project-tech">
+        <span class="tech-pill">TBA</span>
+      </div>
+    </div>
+
   </div>
 </section>
 
